@@ -14,7 +14,7 @@ const historiques = {
 };
 
 function ajouterValeur(type,valeur){
-    const temps = new Date().toLocaleTimeString('fr-CA');
+    const temps = new Date().toLocaleTimeString('fr-FR');
 
     historiques[type].push([temps,valeur]);
     if(historiques[type].length>MAX){

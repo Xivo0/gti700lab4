@@ -27,9 +27,11 @@ async function maj() {
     try {
         for (const type of ['temp', 'lum']) {
 
-            const actuelle = await lire(`/capteurs/${type}`)
-            const historique = await lire(`/capteurs/${type}/${NB}`)
-            const moyenne = await lire(`/capteurs/${type}/${NB}/moy`)
+            const [actuelle, historique, moyenne] = await Promise.all([
+                lire(`/capteurs/${type}`),
+                lire(`/capteurs/${type}/${NB}`),
+                lire(`/capteurs/${type}/${NB}/moy`)
+            ])
 
             majColonne(type, actuelle, moyenne, historique)
         }

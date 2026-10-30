@@ -1,19 +1,28 @@
 const API = "http://localhost:8080"
+const NB = 30
+
+async function lire(route){
+    const reponse = await fetch(API + route)
+    if(!reponse.ok){
+        throw Error(reponse.status + ":" + reponse.statusText);
+    }
+    const val = await reponse.json()
+    return val
+}
+
 
 async function maj() {
     const erreur = document.getElementById("erreur")
 
     try{
-        const reponse = await fetch(API + "/capteurs/temp")    
-
-        if(!reponse.ok){
-            throw Error(reponse.status + ":" + reponse.statusText);
-        }
-
-        const val = await reponse.json()
-        console.log(val)
+        const actuelle = await lire("/capteurs/temp")
+        const historique = await lire(`/capteurs/temp/" + ${NB}`)
+        const moyenne = await lire(`/capteurs/temp/${NB}/moy`)
+        console.log(actuelle)
+        console.log(historique)
+        console.log(moyenne)
         const element = document.getElementById("temp-actuelle")
-        element.textContent = val
+        element.textContent = actuelle
 
         const heure = document.getElementById("maj-heure")
         heure.textContent = new Date().toLocaleTimeString('fr-FR')

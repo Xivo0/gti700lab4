@@ -9,3 +9,4 @@ async function maj() {
 }
 
 maj()
+setInterval(maj,3000)

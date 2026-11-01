@@ -1,6 +1,53 @@
-<h1>Test affichage</h1>
-<p>Temperature : <span id="temp-actuelle">...</span></p>
-<p>Lumiere : <span id="lum-actuelle">...</span></p>
-<p>Dernière mise à jour : <span id="maj-heure">...</span></p>
-<script src="refresh.js"></script>
-<p id="erreur"></p>
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mesures des capteurs</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+  <script src="colonne.js" defer></script>
+  <script src="refresh.js" defer></script>
+</head>
+<body>
+  <main>
+    <header class="page-header">
+      <h1>Mesures des capteurs</h1>
+      <p>Dernière mise à jour : <span id="maj-heure">En attente</span></p>
+    </header>
+    <p id="erreur" role="alert"></p>
+    <div class="columns">
+      <section class="sensor" aria-labelledby="temp-titre">
+        <h2 id="temp-titre">Température</h2>
+        <dl class="metrics">
+          <div><dt>Valeur actuelle</dt><dd><span id="temp-actuelle">—</span> <span class="unit">°C</span></dd></div>
+          <div><dt>Moyenne des 30 dernières mesures</dt><dd><span id="temp-moy">—</span> <span class="unit">°C</span></dd></div>
+        </dl>
+        <div class="chart-container"><canvas id="temp-graph" role="img" aria-label="Évolution de la température. Mesures détaillées dans le tableau ci-dessous."></canvas></div>
+        <h3>Historique</h3>
+        <div class="table-container" tabindex="0" role="region" aria-label="Historique de température">
+          <table>
+            <thead><tr><th scope="col">Date et heure</th><th scope="col">Valeur <span class="unit">(°C)</span></th></tr></thead>
+            <tbody id="temp-tableau"><tr><td colspan="2">En attente de mesures</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="sensor" aria-labelledby="hum-titre">
+        <h2 id="hum-titre">Humidité</h2>
+        <dl class="metrics">
+          <div><dt>Valeur actuelle</dt><dd><span id="hum-actuelle">—</span> <span class="unit hum-unit">%</span></dd></div>
+          <div><dt>Moyenne des 30 dernières mesures</dt><dd><span id="hum-moy">—</span> <span class="unit hum-unit">%</span></dd></div>
+        </dl>
+        <div class="chart-container"><canvas id="hum-graph" role="img" aria-label="Évolution de l’humidité. Mesures détaillées dans le tableau ci-dessous."></canvas></div>
+        <h3>Historique</h3>
+        <div class="table-container" tabindex="0" role="region" aria-label="Historique du second capteur">
+          <table>
+            <thead><tr><th scope="col">Date et heure</th><th scope="col">Valeur <span class="unit hum-unit">(%)</span></th></tr></thead>
+            <tbody id="hum-tableau"><tr><td colspan="2">En attente de mesures</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+</body>
+</html>

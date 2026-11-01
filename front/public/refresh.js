@@ -1,16 +1,6 @@
 const API = "http://localhost:8080"
 const NB = 30
 
-function majColonne(type, actuelle, moyenne, historique) {
-    console.log(type)
-    console.log(actuelle)
-    console.log(historique)
-    console.log(moyenne)
-    const element = document.getElementById(`${type}-actuelle`)
-    element.textContent = actuelle
-}
-
-
 async function lire(route) {
     const reponse = await fetch(API + route)
     if (!reponse.ok) {
